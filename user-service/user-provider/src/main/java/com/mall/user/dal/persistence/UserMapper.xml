@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.user.dal.persistence.UserMapper">
+
+    <select id="selectAllUser" resultType="com.mall.user.dal.entitys.User">
+        select *from tb_member
+    </select>
+
+    <insert id="insertUser">
+        <selectKey order="AFTER" keyColumn="id" keyProperty="id" resultType="long">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into tb_member(id,username,password,email,created,updated,state,isverified) values (null,#{username},
+        #{password},#{email},#{created},#{created},#{state},"N")
+    </insert>
+
+    <select id="selectByUsername" resultType="java.lang.Integer">
+        select count(*) from tb_member where username=#{userName}
+    </select>
+
+    <select id="selectByEmail" resultType="java.lang.Integer">
+        select count(*) from tb_member where email=#{email}
+    </select>
+
+    <insert id="insertVerify">
+        insert into tb_user_verify values (null,#{username},#{registerDate},#{uuid},#{isVerify},#{isExpire})
+    </insert>
+</mapper>

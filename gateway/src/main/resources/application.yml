@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+  mvc:
+    static-path-pattern: /image/**
+
+
+server:
+  port: 8080
